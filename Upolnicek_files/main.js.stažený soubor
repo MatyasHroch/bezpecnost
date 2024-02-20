@@ -1,0 +1,32 @@
+import { createApp, reactive } from "/node_modules/.vite/deps/vue.js?v=f6da5553";
+import App from "/src/App.vue?t=1707989325517";
+import router from "/src/router/index.js?t=1707987814787";
+import "/src/style.css?t=1707989325517";
+
+// Emitter stuff (for global event bus)
+import __vite__cjsImport4_tinyEmitter_instance from "/node_modules/.vite/deps/tiny-emitter_instance.js?v=f6da5553"; const emitter = __vite__cjsImport4_tinyEmitter_instance.__esModule ? __vite__cjsImport4_tinyEmitter_instance.default : __vite__cjsImport4_tinyEmitter_instance;
+
+// highlighter stuff
+import hljs from "/node_modules/.vite/deps/highlight__js.js?v=f6da5553";
+import hljsVuePlugin from "/node_modules/.vite/deps/@highlightjs_vue-plugin.js?v=f6da5553";
+
+// Highlighter
+import "/node_modules/highlight.js/styles/androidstudio.css";
+// import "highlight.js/styles/atom-one-dark.css";
+
+// creating and configuring the vue app
+const app = createApp(App);
+app.config.devtools = true;
+
+// global properties, emitter for global event bus
+app.config.globalProperties.$store = reactive({});
+app.config.globalProperties.$emitter = emitter;
+// console.log(hljs.listLanguages());
+// app.config.globalProperties.$supportedLangueges = hljs.listLanguages();
+
+// what my vue App uses
+app.use(hljsVuePlugin);
+app.use(router);
+
+// mount the app
+app.mount("#app");
